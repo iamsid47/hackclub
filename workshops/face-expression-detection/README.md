@@ -15,7 +15,7 @@ The completed project is hosted on Google Colab, and thus can be found [here](ht
 
 ## Let's get started
 
-This project is going to get divided into 4 major parts. Collecting images with expressions, detecting faces and saving them, training the classifier for expression detection, and recognition of expression in new images.
+This project is divided into 4 major parts. Collecting images, detecting faces and saving them, training the classifier for expression detection, and recognition of expression in new images.
 
 So, the first step is heading over to Google Colab and creating a new notebook. Colab notebooks allow us to combine executable code and rich text in a single document, along with images, HTML, LaTeX, Python and more. It is widely used in machine learning.
 
@@ -29,16 +29,16 @@ Click the **Play/Run** button on the left side of the code snippet to run this c
 
 ![folder](https://cloud-m37cdf42s.vercel.app/0folder.png)
 
-Now, we want to move over to the **facial_expressions** directory so that we can create a directory where we will be first sorting out all the emotions according to their expressions. Thus, click on the **code** button at the bottom to create a new code snippet. Next, let's move over to the **facial_expressions** directory and create a folder named **data_sets** and inside this folder, let's create 5 other folders namely: **anger, happy, sad, neutral, and surprise**.
+Now, we want to move over to the **facial_expressions** directory so that we can create a directory where we will be first sorting out all the emotions according to their expressions. Thus, click on the **code** button at the bottom to create a new code snippet. You can just hover your cursor below the snippt to create another code snippet or just click on the **code** button in the navigation menu. Next, let's move over to the **facial_expressions** directory and create a folder named **data_sets** and inside this folder, let's create 5 other folders namely: **anger, happy, sad, neutral, and surprise**.
 
 ```
 %cd facial_expressions/
 %mkdir -p data_set/{anger,happy,neutral,sad,surprise}
 ```
 
-You can see that in our cloned directory, there are some `.txt` files named as *anger.txt, happy.txt* and so on. Well these files have the names of the image files which are having those emotions/expressions in them. Meaning, an image depicting *anger* will have it's name in the *anger.txt* file. We now want to extract the images with their expressions and then save them to their respective directories which we just created. For example, the images with *anger* as their expression will go into the **anger** folder.
-
 ![create-a-code-snippet](https://cloud-m37cdf42s.vercel.app/2code.png)
+
+You can see that in our cloned directory, there are some `.txt` files named as *anger.txt, happy.txt* and so on. Well these files have the names of the image files which are having those emotions/expressions in them. Meaning, an image depicting *anger* will have it's name in the *anger.txt* file. We now want to extract the images with their expressions and then save them to their respective directories which we just created. For example, the images with *anger* as their expression will go into the **anger** folder.
 
 For this, create a new code snippet and `import cv2` in it. Now we write in some basic code to move the **anger** only images from the **images** folder to **data_sets/anger**. And as a verification, we add in a `print` statement at the end.
 
@@ -52,7 +52,7 @@ for image in img:
 print("done writing")
 ```
 
-The same will be done for all the other images. You can just change *anger.txt* from the above snippet to *happy.txt*, *sad.txt*, etc and also the `cv2` attribute to `data_set/happy/"+image,loadedImage` to this.
+You can do the same for all of the other images. In the code snippet given above, change `with open('anger.txt','r') as f:` to `with open('sad.txt','r') as f:`. Along with this, you also need to update the `cv2` attribute. Currently, it's `cv2.imwrite("data_set/anger/"+image,loadedImage)`. But for images showing **sadness**, you need to change the attribute to `cv2.imwrite("data_set/sad/"+image,loadedImage)`.
 
 Now, we have all the images sorted out, but we need to clear the background of these images first, so that they can then later be used for training purposes. But first, let's create a folder named **dataset** in the directory. Note that **data_sets** and **dataset** are two different directories. 
 
@@ -91,7 +91,7 @@ for image in images:
 print("\n Done creating face data")
 ```
 
-Here, there will be an input  option when you run the code. Now, we will be starting with **0 (Zero)** for anger, **1** for happy, **2** for sad, and so on. This is because when the image naming starts, all the images will be assigned a definite name instead of something random. This step is just to ease in the process of training. The above code is for images with **anger** as their expression. You can do the same for other expressions as well.
+If we run our code, we will be prompted with an integer type input option. We will be starting with **0 (Zero)** for anger, **1** for happy, **2** for sad, and so on. This is because when the image naming starts, all the images will be assigned a definite name instead of something random. This step is just to ease in the process of training. The above code is for images with **anger** as their expression. You can do the same for other expressions as well.
 
 ## Training
 
@@ -152,7 +152,7 @@ print("\n [INFO] {0} Emotions trained. Exiting Program".format(len(np.unique(ids
 
 Let's create another code snippet into which we will be typing some code to test our model and later make a script to display the output it just got.
 
-First, `import cv2, numpy and os` into your snippet. We now have to set the an initial *ID* counter which will be equal to zero. Remember that we had to input a digit just before we were training the images? Well that digit will be used here for the machine to calssify what type of expression-al output shall be provided if it is able to understand the expression in an image. As earlier, we had set **anger** to **0**, **happy** to **1**, and so on. We will be following the same sequence here as well.
+First, `import cv2, numpy and os` into your snippet. We now have to set the an initial *ID* counter which will be equal to zero. Remember that we had to input a digit just before we were training the images? Well that digit will be used here for the machine to classify what type of expression-al output shall be provided if it is able to understand the expression in an image. As earlier, we had set **anger** to **0**, **happy** to **1**, and so on. We will be following the same sequence here as well.
 
 
 ```python
